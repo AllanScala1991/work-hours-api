@@ -5,6 +5,6 @@ services:
     image: postgres:14.5
     container_name: work_hours_db
     environment:
-      - POSTGRES_PASSWORD="root"
+      - POSTGRES_PASSWORD=root
     ports:
       - 5432:5432
