@@ -4,7 +4,7 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "nodemon src/server.ts"
   },
   "author": "Allan Scala",
   "license": "ISC",
@@ -20,6 +20,7 @@
     "@types/jest": "^29.5.2",
     "@types/jsonwebtoken": "^9.0.2",
     "@types/node": "^20.2.5",
+    "nodemon": "^2.0.22",
     "prisma": "^4.15.0",
     "ts-jest": "^29.1.0",
     "ts-node": "^10.9.1",
