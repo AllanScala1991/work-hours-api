@@ -1,5 +1,5 @@
 import { sign, verify } from "jsonwebtoken";
-import { TokenRepository } from "../entities/TokenRepository";
+import { TokenRepository } from "../repositories/Token";
 
 export class JsonWebToken implements TokenRepository {
 

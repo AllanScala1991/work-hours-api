@@ -1,5 +1,5 @@
 import { NextFunction, Router, Request, Response } from "express";
-import { TokenRepository } from "../entities/TokenRepository";
+import { TokenRepository } from "../repositories/Token";
 import { JsonWebToken } from "../helpers/JsonWebToken";
 import { TokenService } from "../services/TokenService";
 

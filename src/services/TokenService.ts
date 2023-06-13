@@ -1,4 +1,4 @@
-import { TokenRepository } from "../entities/TokenRepository";
+import { TokenRepository } from "../repositories/Token";
 
 
 export class TokenService implements TokenRepository {
