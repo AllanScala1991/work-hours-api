@@ -1,4 +1,4 @@
-export interface CreateUser {
+export interface CreateUserModel {
     name: string
     email: string
     phone: string
@@ -10,8 +10,6 @@ export interface CreateUser {
     authorization: string
 }
 
-export interface User extends CreateUser {
+export interface UserModel extends CreateUserModel {
     id: string
-    createAt: Date
-    updatedAt: Date
 }

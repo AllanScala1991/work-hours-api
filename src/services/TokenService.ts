@@ -1,21 +1,22 @@
+import { GenerateTokenModel, ValidateTokenModel } from "../models/Token";
 import { TokenRepository } from "../repositories/Token";
 
 
 export class TokenService implements TokenRepository {
     constructor(private tokenRepository: TokenRepository){}
 
-    generate(id: string, name: string): string {
-        if(!id || !name) throw new Error("Invalid id or name");
+    generate(data: GenerateTokenModel): string {
+        if(!data.id || !data.name) throw new Error("Invalid id or name");
 
-        const token = this.tokenRepository.generate(id, name);
+        const token = this.tokenRepository.generate(data);
 
         return token;
     }
 
-    validate(token: string): string {
-        if(!token) throw new Error("User not authenticated");
+    validate(data: ValidateTokenModel): string {
+        if(!data.token) throw new Error("User not authenticated");
 
-        const isTokenValid = this.tokenRepository.validate(token)
+        const isTokenValid = this.tokenRepository.validate(data)
 
         if(!isTokenValid) throw new Error("Expired token");
 
