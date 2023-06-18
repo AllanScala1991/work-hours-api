@@ -1,5 +1,5 @@
-import { HashModel, CompareModel } from "../models/Encrypter";
-import { EncrypterRepository } from "../repositories/Encrypter";
+import { HashModel, CompareModel } from "../../models/Encrypter";
+import { EncrypterRepository } from "../../repositories/Encrypter";
 
 
 export class EncrypterService implements EncrypterRepository {

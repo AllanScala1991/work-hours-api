@@ -1,5 +1,5 @@
 import { UserModel } from "../../models/User";
-import { UserService } from "../../services/UserService"
+import { UserService } from "../../services/user/UserService"
 
 export async function findUserByUsername(username: string): Promise<UserModel[]> {
     try {

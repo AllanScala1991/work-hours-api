@@ -1,6 +1,6 @@
-import { UserModel } from "../models/User";
-import { UserRepository } from "../repositories/User";
-import prisma from "../helpers/Prisma";
+import { UserModel } from "../../models/User";
+import { UserRepository } from "../../repositories/User";
+import prisma from "../../helpers/Prisma";
 
 export class UserService implements UserRepository {
 

@@ -1,5 +1,5 @@
-import { GenerateTokenModel, ValidateTokenModel } from "../models/Token";
-import { TokenRepository } from "../repositories/Token";
+import { GenerateTokenModel, ValidateTokenModel } from "../../models/Token";
+import { TokenRepository } from "../../repositories/Token";
 
 
 export class TokenService implements TokenRepository {

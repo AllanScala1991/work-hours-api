@@ -1,7 +1,7 @@
 import { NextFunction, Router, Request, Response } from "express";
 import { TokenRepository } from "../repositories/Token";
 import { JsonWebToken } from "../helpers/JsonWebToken";
-import { TokenService } from "../services/TokenService";
+import { TokenService } from "../services/token/TokenService";
 
 
 const app = Router();
