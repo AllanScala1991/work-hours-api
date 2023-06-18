@@ -1,8 +1,12 @@
 import express from "express";
 
 const app = express();
-const PORT = parseInt(`${process.env.PORT}`) || 3000;
 
-app.listen(PORT, () => {
+app.use(express.json())
+
+//ROUTES
+app.use(require("./routes/Login"));
+
+app.listen(3000, () => {
     console.log("Server is running")
 })

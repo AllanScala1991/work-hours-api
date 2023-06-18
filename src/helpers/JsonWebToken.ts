@@ -7,7 +7,7 @@ export class JsonWebToken implements TokenRepository {
     generate(data: GenerateTokenModel): string {
         return sign({
             id: data.id,
-            name: name
+            name: data.name
         }, `${process.env.SECRET_KEY}`, {
             expiresIn: '1d'
         });
