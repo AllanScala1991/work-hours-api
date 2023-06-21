@@ -5,11 +5,11 @@ import { EncrypterRepository } from "../../repositories/Encrypter";
 export class Bcrypt implements EncrypterRepository {
 
     async encrypt(data: HashModel): Promise<string> {
-        return hash(data.value, data.salt);
+        return await hash(data.value, data.salt);
     }
 
     async compare(data: CompareModel): Promise<boolean> {
-        return compare(data.current, data.hash);
+        return await compare(data.current, data.hash);
     }
     
 }
