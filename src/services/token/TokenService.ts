@@ -6,7 +6,7 @@ export class TokenService implements TokenRepository {
     constructor(private tokenRepository: TokenRepository){}
 
     generate(data: GenerateTokenModel): string {
-        if(!data.id || !data.name) throw new Error("Invalid id or name");
+        if(!data.id || !data.name) return "ID ou Nome inválidos";
 
         const token = this.tokenRepository.generate(data);
 
@@ -14,11 +14,11 @@ export class TokenService implements TokenRepository {
     }
 
     validate(data: ValidateTokenModel): string {
-        if(!data.token) throw new Error("User not authenticated");
+        if(!data.token) return "Usuário não autenticado";
 
         const isTokenValid = this.tokenRepository.validate(data)
 
-        if(!isTokenValid) throw new Error("Expired token");
+        if(!isTokenValid) return "Token expirado";
 
         return isTokenValid;
     }
