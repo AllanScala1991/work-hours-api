@@ -16,7 +16,7 @@ app.use((req: Request, res: Response, next: NextFunction) => {
 
         const token = bearer.split(" ");
 
-        tokenService.validate(token[1]);
+        tokenService.validate({token: token[1]});
 
         return next();
     } catch (error) {
