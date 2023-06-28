@@ -11,5 +11,11 @@ export class UserService implements UserRepository {
             }
         })
     }
+
+    async createUser(user: UserModel): Promise<UserModel> {
+        return await prisma.users.create({
+            data: user
+        });
+    }
     
 }
