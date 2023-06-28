@@ -1,4 +1,4 @@
-import { UserModel } from "../../models/User";
+import { CreateUserModel, UserModel } from "../../models/User";
 import { UserRepository } from "../../repositories/User";
 import prisma from "../../helpers/ormPrisma/Prisma";
 
@@ -12,7 +12,7 @@ export class UserService implements UserRepository {
         })
     }
 
-    async createUser(user: UserModel): Promise<UserModel> {
+    async createUser(user: CreateUserModel): Promise<UserModel> {
         return await prisma.users.create({
             data: user
         });
