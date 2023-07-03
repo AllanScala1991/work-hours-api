@@ -9,6 +9,6 @@ export async function findUserByUsername(username: string): Promise<UserModel[]>
         
         return user;
     } catch (error) {
-        return error
+        throw new Error(error.message)
     }
 }
