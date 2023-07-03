@@ -1,6 +1,7 @@
 import { CreateUserModel, UserModel } from "../../models/User";
 import { EncrypterRepository } from "../../repositories/Encrypter";
 import { UserService } from "../../services/user/UserService";
+import { findUserByEmail } from "./FindUserByEmail";
 import { findUserByUsername } from "./FindUserByUsername";
 
 
@@ -19,6 +20,10 @@ export async function createNewUser(user: CreateUserModel, encrypter: EncrypterR
         const userExists = await findUserByUsername(user.username);
 
         if(userExists.length > 0) throw new Error("Já existe um usuário com essas informações, tente novamente.")
+
+        const isUserEmailDuplicated = await findUserByEmail(user.email);
+
+        if(isUserEmailDuplicated) throw new Error("Já existe um usuário com essas informações, tente novamente.")
 
         const passwordEncrypted = await encrypter.encrypt({value: user.password, salt: 8});
 

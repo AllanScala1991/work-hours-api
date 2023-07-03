@@ -17,5 +17,13 @@ export class UserService implements UserRepository {
             data: user
         });
     }
+
+    async findUserByEmail(email: string): Promise<UserModel> {
+        return await prisma.users.findUnique({
+            where: {
+                email: email
+            }
+        });
+    }
     
 }
