@@ -8,6 +8,8 @@ export interface CreateUserModel {
     position: string
     sector: string
     authorization: string
+    secretQuestion: string
+    secretAnswer: string
 }
 
 export interface UserModel extends CreateUserModel {

@@ -18,6 +18,8 @@ model Users {
   position String
   sector String
   authorization String
+  secretQuestion String
+  secretAnswer String
   createdAt DateTime @default(now())
   updatedAt DateTime @default(now())
 }
