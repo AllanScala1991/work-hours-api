@@ -31,6 +31,3 @@ export class UserLogin {
         }
     }
 }
-
-// testar
-// criar uma rota para criar usuário
