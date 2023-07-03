@@ -12,7 +12,7 @@ app.use((req: Request, res: Response, next: NextFunction) => {
     try {
         const bearer = req.headers.authorization;
 
-        if(!bearer) return res.status(401).json("User not authenticated")
+        if(!bearer) return res.status(401).json("Usuário não autenticado")
 
         const token = bearer.split(" ");
 
