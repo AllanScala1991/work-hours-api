@@ -17,7 +17,7 @@ export class UserLogin {
     
             const isUserExists = await findUserByUsername(user.username);
     
-            if(isUserExists.length == 0) throw new Error("Usuário ou Senha inválidos, tente novamente.")
+            if(isUserExists == null) throw new Error("Usuário ou Senha inválidos, tente novamente.")
     
             const isPasswordValid = await new EncrypterService(this.encrypterRepository).compare({current: user.password, hash: isUserExists[0].password})
     
