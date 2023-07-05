@@ -25,5 +25,15 @@ export class UserService implements UserRepository {
             }
         });
     }
+
+    async updateUserPassword(username: string, password: string): Promise<UserModel> {
+        return await prisma.users.update({
+            where: {
+                username: username
+            }, data: {
+                password: password
+            }
+        })
+    }
     
 }

@@ -4,4 +4,5 @@ export interface UserRepository {
     findUserByUsername(username: string): Promise<UserModel>
     createUser(user: CreateUserModel): Promise<UserModel>
     findUserByEmail(email: string): Promise<UserModel>
+    updateUserPassword(username: string, password: string): Promise<UserModel>
 }
