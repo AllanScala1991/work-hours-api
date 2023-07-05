@@ -4,8 +4,8 @@ import prisma from "../../helpers/ormPrisma/Prisma";
 
 export class UserService implements UserRepository {
 
-    async findUserByUsername(username: string): Promise<UserModel[]> {
-        return await prisma.users.findMany({
+    async findUserByUsername(username: string): Promise<UserModel> {
+        return await prisma.users.findUnique({
             where: {
                 username: username
             }

@@ -19,7 +19,7 @@ export async function createNewUser(user: CreateUserModel, encrypter: EncrypterR
 
         const userExists = await findUserByUsername(user.username);
 
-        if(userExists.length > 0) throw new Error("Já existe um usuário com essas informações, tente novamente.")
+        if(userExists == null) throw new Error("Já existe um usuário com essas informações, tente novamente.")
 
         const isUserEmailDuplicated = await findUserByEmail(user.email);
 

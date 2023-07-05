@@ -1,9 +1,9 @@
 import { UserModel } from "../../models/User";
 import { UserService } from "../../services/user/UserService"
 
-export async function findUserByUsername(username: string): Promise<UserModel[]> {
+export async function findUserByUsername(username: string): Promise<UserModel> {
     try {
-        if(!username) return []
+        if(!username) return null
     
         const user = await new UserService().findUserByUsername(username);
         
