@@ -87,4 +87,27 @@ describe("User Service Tests", () => {
         expect(user).not.toBeNull;
         expect(user.name).toEqual("Test");
     })
+
+    test("Update user password", async () => {
+        jest.spyOn(prisma.users, 'update').mockImplementationOnce((): any => {
+            return {
+                id: "123",
+                name: "Test",
+                email: "test@mail.com",
+                phone: "41999999999",
+                address: "test",
+                username: "test",
+                password: "999",
+                position: "test",
+                sector: "test",
+                authorization: "test",
+                createdAt: new Date(),
+                updatedAt: new Date()
+            }
+        })
+
+        const user = await userService.updateUserPassword("test", "999");
+
+        expect(user.password).toEqual("999");
+    })
 })
