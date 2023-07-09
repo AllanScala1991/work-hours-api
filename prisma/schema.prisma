@@ -8,18 +8,52 @@ datasource db {
 }
 
 model Users {
-  id String @id @default(uuid())
-  name String
-  email String @unique
-  phone String
-  address String
-  username String @unique
-  password String
-  position String
-  sector String
-  authorization String
+  id             String   @id @default(uuid())
+  name           String
+  email          String   @unique
+  phone          String
+  address        String
+  username       String   @unique
+  password       String
+  position       String
+  sector         String
+  status         String
   secretQuestion String
-  secretAnswer String
-  createdAt DateTime @default(now())
-  updatedAt DateTime @default(now())
+  secretAnswer   String
+  companyId      String
+  company        Company  @relation(fields: [companyId], references: [id])
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @default(now())
+  Hours          Hours[]
+}
+
+model Company {
+  id            String   @id @default(uuid())
+  name          String
+  cnpj          String   @unique
+  email         String   @unique
+  phone         String
+  address       String
+  username      String   @unique
+  password      String
+  authorization String   @default("admin")
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @default(now())
+  Users         Users[]
+}
+
+model Sector {
+  id        String   @id @default(uuid())
+  name      String
+  positions String[]
+}
+
+model Hours {
+  id     String @id @default(uuid())
+  userId String
+  user   Users  @relation(fields: [userId], references: [id])
+  hour   String
+  day    String
+  month  String
+  year   String
 }
