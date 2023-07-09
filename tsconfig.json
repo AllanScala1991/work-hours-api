@@ -1,13 +1,15 @@
 {
   "compilerOptions": {
       "target": "ES6",
+      "types": ["cypress", "node"],
       "module": "commonjs",
       "outDir": "./build",
       "rootDir": "",
       "declaration": true,
       "moduleResolution": "node",
-      "sourceMap": true,
+      "sourceMap": false,
       "strict": false,
       "esModuleInterop": true
-  }
+  },
+  "include": ["**/*.ts"]
 }
