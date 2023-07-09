@@ -18,8 +18,8 @@ export async function createNewUser(user: CreateUserModel, encrypter: EncrypterR
         if(emptyUser) throw new Error("Todos os campos devem ser preenchidos.");
 
         const userExists = await findUserByUsername(user.username);
-
-        if(userExists == null) throw new Error("Já existe um usuário com essas informações, tente novamente.")
+        
+        if(userExists != null) throw new Error("Já existe um usuário com essas informações, tente novamente.")
 
         const isUserEmailDuplicated = await findUserByEmail(user.email);
 
