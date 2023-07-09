@@ -1,6 +1,6 @@
 import { Request, Response, Router } from "express";
-import { UserController } from "../controllers/user/UserController";
-import apiToken from "../middlewares/CreateUserAuth";
+import { UserController } from "../../controllers/user/UserController";
+import apiToken from "../../middlewares/CreateUserAuth";
 
 
 const app: Router = Router();

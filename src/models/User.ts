@@ -7,9 +7,10 @@ export interface CreateUserModel {
     password: string
     position: string
     sector: string
-    authorization: string
+    status: string
     secretQuestion: string
     secretAnswer: string
+    companyId: string
 }
 
 export interface UserModel extends CreateUserModel {
