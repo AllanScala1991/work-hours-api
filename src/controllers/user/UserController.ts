@@ -34,18 +34,10 @@ export class UserController {
     }
 
     async validateAnswer(req: Request, res: Response) {
-        const { username, secretAnswer } = req.body;
+        const { username, secretAnswer, newPassword } = req.body;
 
-        const response = await RecoveryPassword.validateAnswer(username, secretAnswer);
+        const response = await new RecoveryPassword().validateAnswer(username, secretAnswer, newPassword, this.encrypterRepository);
 
         return res.status(response.status).json(response)
-    }
-
-    async updatePassword(req: Request, res: Response) {
-        const { username, password } = req.body;
-
-        const response = await RecoveryPassword.updatePassword(username, password, this.encrypterRepository);
-
-        res.status(response.status).json(response);
     }
 }
