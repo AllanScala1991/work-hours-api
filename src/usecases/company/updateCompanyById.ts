@@ -1,11 +1,12 @@
-import { CompanyModel, CreateCompanyModel } from "../../models/Company";
+import { CreateCompanyModel } from "../../models/Company";
+import { ResponseModel } from "../../models/Response";
 import { EncrypterRepository } from "../../repositories/Encrypter";
 import { CompanyService } from "../../services/company/CompanyService";
 
 
-export async function updateCompanyById(companyId: string, companyData: CreateCompanyModel, encrypter: EncrypterRepository): Promise<CompanyModel> {
+export async function updateCompanyById(companyId: string, companyData: CreateCompanyModel, encrypter: EncrypterRepository): Promise<ResponseModel> {
     try {
-        if(!companyId) throw new Error("ID da compania inválido.");
+        if(!companyId) return {status: 400, message: "ID da compania inválido."};
 
         let isCompanyDataEmpty = false;
 
@@ -16,7 +17,7 @@ export async function updateCompanyById(companyId: string, companyData: CreateCo
             }
         }
 
-        if(isCompanyDataEmpty) throw new Error("Todos os campos devem ser preenchidos.")
+        if(isCompanyDataEmpty) return {status: 400, message: "Todos os campos devem ser preenchidos."}
 
         const passwordEncrypted = await encrypter.encrypt({value: companyData.password, salt: 8});
 
@@ -24,9 +25,9 @@ export async function updateCompanyById(companyId: string, companyData: CreateCo
 
         const company = await new CompanyService().updateCompanyById(companyId, companyData);
 
-        return company;
+        return {status: 200, data: company};
         
     } catch (error) {
-        throw new Error(error.message)
+        return {status: 500, message: error}
     }
 }

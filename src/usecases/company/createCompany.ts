@@ -1,10 +1,11 @@
-import { CompanyModel, CreateCompanyModel } from "../../models/Company";
+import { CreateCompanyModel } from "../../models/Company";
+import { ResponseModel } from "../../models/Response";
 import { EncrypterRepository } from "../../repositories/Encrypter";
 import { CompanyService } from "../../services/company/CompanyService";
 import { validateCompanyExists } from "./validateCompanyExists";
 
 
-export async function createNewCompany(company: CreateCompanyModel, encrypter: EncrypterRepository): Promise<CompanyModel> {
+export async function createNewCompany(company: CreateCompanyModel, encrypter: EncrypterRepository): Promise<ResponseModel> {
     try {
         let emptyCompanyData = false;
         
@@ -15,11 +16,11 @@ export async function createNewCompany(company: CreateCompanyModel, encrypter: E
             }
         }
 
-        if(emptyCompanyData) throw new Error("Todos os campos devem ser preenchidos.");
+        if(emptyCompanyData) return {status: 400, message: "Todos os campos devem ser preenchidos."};
 
         const isCompanyExists = await validateCompanyExists(company.cnpj, company.email, company.username);
 
-        if(isCompanyExists.length > 0) throw new Error("Erro, verifique se já existe uma compania cadastrada.");
+        if(isCompanyExists.length > 0) return {status: 400, message: "Erro, verifique se já existe uma compania cadastrada."}
 
         const passwordEncrypted = await encrypter.encrypt({value: company.password, salt: 8});
 
@@ -27,9 +28,9 @@ export async function createNewCompany(company: CreateCompanyModel, encrypter: E
 
         const createCompany = new CompanyService().createCompany(company);
 
-        return createCompany;
+        return {status: 201, data: createCompany};
 
     } catch (error) {
-        throw new Error(error.message)
+        return {status: 500, message: error}
     }
 }

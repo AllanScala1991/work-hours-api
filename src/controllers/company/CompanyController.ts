@@ -15,28 +15,19 @@ export class CompanyController {
     }
 
     async create(req: Request, res: Response) {
-        try {
-            const company: CompanyModel = req.body;
+        const company: CompanyModel = req.body;
 
-            const response = await createNewCompany(company, this.encrypter);
+        const response = await createNewCompany(company, this.encrypter);
 
-            return res.status(201).json(response);
-        } catch (error) {
-            return res.status(500).json({error: error.message});
-        }
+        return res.status(response.status).json(response);
     }
 
     async findCompanyById(req: Request, res: Response) {
-        try {
-            const companyId = req.params.companyid;
+        const companyId = req.params.companyid;
 
-            const response = await findCompanyById(companyId);
+        const response = await findCompanyById(companyId);
 
-            return res.status(200).json(response);
-            
-        } catch (error) {
-            return res.status(500).json({error: error.message})
-        }
+        return res.status(response.status).json(response);
     }
 
     async update(req: Request, res: Response) {
@@ -44,6 +35,6 @@ export class CompanyController {
 
         const response = await updateCompanyById(companyid, {name, cnpj, email, phone, address, username, password}, this.encrypter);
 
-        return res.status(200).json(response);
+        return res.status(response.status).json(response);
     }
 }
