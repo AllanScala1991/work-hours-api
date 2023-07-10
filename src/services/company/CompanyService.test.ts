@@ -56,9 +56,9 @@ describe("Company Service Tests", () => {
         expect(company.name).toEqual("Company Test");
     })
 
-    test("Find company from cnpj", async () => {
-        jest.spyOn(prisma.company, "findUnique").mockImplementationOnce((): any => {
-            return {
+    test("Validate company exists", async () => {
+        jest.spyOn(prisma.company, "findMany").mockImplementationOnce((): any => {
+            return [{
                 id: "123",
                 name: "Company Test",
                 cnpj: "00000000/000000",
@@ -69,13 +69,13 @@ describe("Company Service Tests", () => {
                 password: "123",
                 createdAt: new Date(),
                 updatedAt: new Date()
-            }
+            }]
         })
 
-        const company = await companyService.findCompanyByCnpj("00000000/000000");
+        const company = await companyService.validateCompanyExists("00000000/000000", "test", "test@mail.com");
 
-        expect(company.cnpj).toEqual("00000000/000000");
-        expect(company.name).toEqual("Company Test");
+        expect(company[0].cnpj).toEqual("00000000/000000");
+        expect(company[0].name).toEqual("Company Test");
     })
 
     test("Update company by id", async () => {
