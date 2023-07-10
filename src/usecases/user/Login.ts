@@ -1,4 +1,5 @@
 import { LoginModel } from "../../models/Login";
+import { ResponseModel } from "../../models/Response";
 import { EncrypterRepository } from "../../repositories/Encrypter";
 import { TokenRepository } from "../../repositories/Token";
 import { EncrypterService } from "../../services/encrypter/EncrypterService";
@@ -11,23 +12,23 @@ export class UserLogin {
         private tokenRepository: TokenRepository
     ){}
 
-    async handle(user: LoginModel): Promise<string> {
+    async handle(user: LoginModel): Promise<ResponseModel> {
         try {
-            if(!user.username || !user.password) throw new Error("Usuário ou Senha inválidos, tente novamente.")
+            if(!user.username || !user.password) return {status: 400, message: "Usuário ou Senha inválidos, tente novamente."}
     
             const isUserExists = await findUserByUsername(user.username);
     
-            if(isUserExists == null) throw new Error("Usuário ou Senha inválidos, tente novamente.")
+            if(isUserExists == null) return {status: 404, message: "Usuário ou Senha inválidos, tente novamente."}
     
             const isPasswordValid = await new EncrypterService(this.encrypterRepository).compare({current: user.password, hash: isUserExists[0].password})
     
-            if(!isPasswordValid) throw new Error("Usuário ou Senha inválidos, tente novamente.")
+            if(!isPasswordValid) return {status: 404, message: "Usuário ou Senha inválidos, tente novamente."}
     
             const token = await new TokenService(this.tokenRepository).generate({id: isUserExists[0].id, name: isUserExists[0].name})
     
-            return token
+            return {status: 200, token: token}
         } catch (error) {
-            throw new Error(error.message)
+            return {status: 500, message: error}
         }
     }
 }

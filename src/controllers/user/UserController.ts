@@ -15,59 +15,39 @@ export class UserController {
     }
     
     async create(req: Request, res: Response) {
-        try {
-            const  user: CreateUserModel = req.body;
+        const  user: CreateUserModel = req.body;
             
-            const response = await createNewUser(user, this.encrypterRepository);
+        const response = await createNewUser(user, this.encrypterRepository);
 
-            return res.status(201).json(response);
-            
-        } catch (error) {
-            return res.status(500).json({error: error.message});
-        }
+        return res.status(response.status).json(response);
     }
 
     async getQuestionAndAnswer(req: Request, res: Response) {
-        try {
-            const username  = req.params.username;
+        const username  = req.params.username;
 
-            const user = await findUserByUsername(username);
+        const user = await findUserByUsername(username);
 
-            const response = {
-                secretQuestion: user.secretQuestion,
-                secretAnswer: user.secretAnswer
-            }
-
-            return res.status(200).json(response);
-            
-        } catch (error) {
-            return res.status(500).json({error: error.message});
+        const response = {
+            secretQuestion: user.data.secretQuestion,
+            secretAnswer: user.data.secretAnswer
         }
+
+        return res.status(user.status).json(response);
     }
 
     async validateAnswer(req: Request, res: Response) {
-        try {
-            const { username, secretAnswer } = req.body;
+        const { username, secretAnswer } = req.body;
 
-            const response = await RecoveryPassword.validateAnswer(username, secretAnswer);
+        const response = await RecoveryPassword.validateAnswer(username, secretAnswer);
 
-            return res.status(200).json(response)
-            
-        } catch (error) {
-            return res.status(500).json({error: error.message});
-        }
+        return res.status(response.status).json(response)
     }
 
     async updatePassword(req: Request, res: Response) {
-        try {
-            const { username, password } = req.body;
+        const { username, password } = req.body;
 
-            const response = await RecoveryPassword.updatePassword(username, password, this.encrypterRepository);
+        const response = await RecoveryPassword.updatePassword(username, password, this.encrypterRepository);
 
-            res.status(200).json(response);
-            
-        } catch (error) {
-            return res.status(500).json({error: error.message});
-        }
+        res.status(response.status).json(response);
     }
 }

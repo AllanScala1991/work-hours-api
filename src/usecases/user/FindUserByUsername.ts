@@ -1,14 +1,14 @@
-import { UserModel } from "../../models/User";
+import { ResponseModel } from "../../models/Response";
 import { UserService } from "../../services/user/UserService"
 
-export async function findUserByUsername(username: string): Promise<UserModel> {
+export async function findUserByUsername(username: string): Promise<ResponseModel> {
     try {
         if(!username) return null
     
         const user = await new UserService().findUserByUsername(username);
         
-        return user;
+        return {status: 200, data: user};
     } catch (error) {
-        throw new Error(error.message)
+        return {status: 500, message: error}
     }
 }

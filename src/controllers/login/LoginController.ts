@@ -18,17 +18,10 @@ export class LoginController {
     }
 
     async login(req: Request, res: Response) {
-        try {
             const {username, password} = req.body;
 
             const response = await this.userLogin.handle({username, password})
 
-            return res.status(200).json(response);
-            
-        } catch (error) {
-            
-            return res.status(500).json({error: error.message})
-        }
-
+            return res.status(response.status).json(response);
     }
 }
