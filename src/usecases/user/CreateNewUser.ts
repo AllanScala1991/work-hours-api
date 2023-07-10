@@ -20,11 +20,11 @@ export async function createNewUser(user: CreateUserModel, encrypter: EncrypterR
 
         const userExists = await findUserByUsername(user.username);
         
-        if(userExists != null) return {status: 400, message: "Já existe um usuário com essas informações, tente novamente."}
-
+        if(userExists.data != null) return {status: 400, message: "Já existe um usuário com essas informações, tente novamente."}
+        
         const isUserEmailDuplicated = await findUserByEmail(user.email);
-
-        if(isUserEmailDuplicated) return {status: 400, message: "Já existe um usuário com essas informações, tente novamente."}
+        
+        if(isUserEmailDuplicated.data != null) return {status: 400, message: "Já existe um usuário com essas informações, tente novamente."}
 
         const passwordEncrypted = await encrypter.encrypt({value: user.password, salt: 8});
 
