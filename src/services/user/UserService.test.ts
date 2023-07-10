@@ -15,9 +15,10 @@ describe("User Service Tests", () => {
                 password: "123",
                 position: "test",
                 sector: "test",
-                authorization: "test",
+                status: "active",
                 createdAt: new Date(),
-                updatedAt: new Date()
+                updatedAt: new Date(),
+                companyId: "123456789"
             }
         })
 
@@ -56,9 +57,10 @@ describe("User Service Tests", () => {
             password: "123",
             position: "test",
             sector: "test",
-            authorization: "test",
+            status: "active",
             secretQuestion: "nome da mae?", 
-            secretAnswer: "test"
+            secretAnswer: "test",
+            companyId: "123456789"
         });
 
         expect(user.name).toEqual("Test");
@@ -76,9 +78,10 @@ describe("User Service Tests", () => {
                 password: "123",
                 position: "test",
                 sector: "test",
-                authorization: "test",
+                status: "active",
                 createdAt: new Date(),
-                updatedAt: new Date()
+                updatedAt: new Date(),
+                companyId: "123456789"
             }
         })
 
