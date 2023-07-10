@@ -28,9 +28,7 @@ export class UserController {
         const user = await findUserByUsername(username);
 
         const response = {
-            secretQuestion: user.data.secretQuestion,
-            secretAnswer: user.data.secretAnswer
-        }
+            secretQuestion: user.data.secretQuestion        }
 
         return res.status(user.status).json(response);
     }
