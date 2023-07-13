@@ -2,6 +2,7 @@ import { CreateCompanyModel } from "../../models/Company";
 import { ResponseModel } from "../../models/Response";
 import { EncrypterRepository } from "../../repositories/Encrypter";
 import { CompanyService } from "../../services/company/CompanyService";
+import { findCompanyById } from "./findCompanyById";
 
 
 export async function updateCompanyById(companyId: string, companyData: CreateCompanyModel, encrypter: EncrypterRepository): Promise<ResponseModel> {
@@ -18,6 +19,10 @@ export async function updateCompanyById(companyId: string, companyData: CreateCo
         }
 
         if(isCompanyDataEmpty) return {status: 400, message: "Todos os campos devem ser preenchidos."}
+
+        const companyExists = await findCompanyById(companyId);
+        
+        if(companyExists.data == null) return {status: 400, message: "Nenhuma compania localizada com o ID informado, tente novamente."}
 
         const passwordEncrypted = await encrypter.encrypt({value: companyData.password, salt: 8});
 

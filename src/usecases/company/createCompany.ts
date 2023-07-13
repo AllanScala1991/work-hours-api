@@ -26,7 +26,7 @@ export async function createNewCompany(company: CreateCompanyModel, encrypter: E
 
         company.password = passwordEncrypted;
 
-        const createCompany = new CompanyService().createCompany(company);
+        const createCompany = await new CompanyService().createCompany(company);
 
         return {status: 201, data: createCompany};
 

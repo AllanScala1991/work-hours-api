@@ -19,7 +19,7 @@ export class CompanyController {
 
         const response = await createNewCompany(company, this.encrypter);
 
-        return res.status(response.status).json(response);
+        return res.status(response.status).json(response)
     }
 
     async findCompanyById(req: Request, res: Response) {
@@ -27,7 +27,7 @@ export class CompanyController {
 
         const response = await findCompanyById(companyId);
 
-        return res.status(response.status).json(response);
+        return res.status(response.status).json(response)
     }
 
     async update(req: Request, res: Response) {
@@ -35,6 +35,6 @@ export class CompanyController {
 
         const response = await updateCompanyById(companyid, {name, cnpj, email, phone, address, username, password}, this.encrypter);
 
-        return res.status(response.status).json(response);
+        return res.status(response.status).json(response)
     }
 }
