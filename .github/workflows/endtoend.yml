@@ -43,7 +43,7 @@ jobs:
         run: npx prisma migrate dev
 
       - name: Construir e iniciar servidor web local
-        run: npm run start &
+        run: npm run dev &
 
       - name: Clone Cypress repository
         run: git clone https://github.com/AllanScala1991/work-hours-api-tests
